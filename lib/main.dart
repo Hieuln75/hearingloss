@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Supabase Demo',
+      title: 'Dạy nghĩa học nói ',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Supabase Demo'),
+          title: Text('Chương trình cho Nghĩa học'),
         ),
         body: AuthPage(),
       ),
@@ -120,7 +120,7 @@ Future<void> signIn() async {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          TextField(
+          /*TextField(
             controller: _emailController,
             decoration: InputDecoration(labelText: 'Email'),
           ),
@@ -144,9 +144,10 @@ Future<void> signIn() async {
           ),
           SizedBox(height: 20),
           Text(message),
-          Divider(height: 40),
+          Divider(height: 40),*/
+
           Text(
-            'Nghe audio (guest cũng nghe được):',
+            'Nghe audio (Nghĩa học bài):',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           Row(
@@ -169,7 +170,7 @@ Future<void> signIn() async {
           ),
           SizedBox(height: 30),
           Text(
-           'Danh sách chữ cái (từ Supabase):',
+           'Danh sách chữ cái chi nghĩa học:',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(
