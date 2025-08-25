@@ -120,31 +120,7 @@ Future<void> signIn() async {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          /*TextField(
-            controller: _emailController,
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
-          TextField(
-            controller: _passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
-            obscureText: true,
-          ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: signUp,
-            child: Text('Sign Up'),
-          ),
-          ElevatedButton(
-            onPressed: signIn,
-            child: Text('Sign In'),
-          ),
-          ElevatedButton(
-            onPressed: signOut,
-            child: Text('Sign Out'),
-          ),
-          SizedBox(height: 20),
-          Text(message),
-          Divider(height: 40),*/
+        
 
           Text(
             'Nghe audio (Nghĩa học bài):',
