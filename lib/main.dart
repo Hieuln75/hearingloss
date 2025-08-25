@@ -120,7 +120,31 @@ Future<void> signIn() async {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-        
+          /*TextField(
+            controller: _emailController,
+            decoration: InputDecoration(labelText: 'Email'),
+          ),
+          TextField(
+            controller: _passwordController,
+            decoration: InputDecoration(labelText: 'Password'),
+            obscureText: true,
+          ),
+          SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: signUp,
+            child: Text('Sign Up'),
+          ),
+          ElevatedButton(
+            onPressed: signIn,
+            child: Text('Sign In'),
+          ),
+          ElevatedButton(
+            onPressed: signOut,
+            child: Text('Sign Out'),
+          ),
+          SizedBox(height: 20),
+          Text(message),
+          Divider(height: 40),*/
 
           Text(
             'Nghe audio (Nghĩa học bài):',
@@ -150,7 +174,7 @@ Future<void> signIn() async {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(
-          height: 300, // hoặc bất kỳ chiều cao nào bạn muốn
+          height: 500, // hoặc bất kỳ chiều cao nào bạn muốn
           child: LetterAudioList(),
           ),
 

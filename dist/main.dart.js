@@ -70888,7 +70888,7 @@ r.W$=0
 s.r.m()
 s.aN()},
 Y(a){var s,r=null,q=t.af
-q=A.e([A.rw("Nghe audio (Ngh\u0129a h\u1ecdc b\xe0i):",A.oA(r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.eb,r,r,!0,r,r,r,r,r,r,r,r)),A.aCl(A.e([A.akL(A.rw("Play",r),new A.ac8(this)),A.Jm(r,r,10),A.akL(A.rw("Pause",r),new A.ac9(this)),A.Jm(r,r,10),A.akL(A.rw("Stop",r),new A.aca(this))],q),B.cR,B.qd),A.Jm(r,30,r),A.rw("Danh s\xe1ch ch\u1eef c\xe1i chi ngh\u0129a h\u1ecdc:",A.oA(r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.eb,r,r,!0,r,r,r,r,r,r,r,r)),A.Jm(new A.wy(r),300,r)],q)
+q=A.e([A.rw("Nghe audio (Ngh\u0129a h\u1ecdc b\xe0i):",A.oA(r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.eb,r,r,!0,r,r,r,r,r,r,r,r)),A.aCl(A.e([A.akL(A.rw("Play",r),new A.ac8(this)),A.Jm(r,r,10),A.akL(A.rw("Pause",r),new A.ac9(this)),A.Jm(r,r,10),A.akL(A.rw("Stop",r),new A.aca(this))],q),B.cR,B.qd),A.Jm(r,30,r),A.rw("Danh s\xe1ch ch\u1eef c\xe1i chi ngh\u0129a h\u1ecdc:",A.oA(r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.eb,r,r,!0,r,r,r,r,r,r,r,r)),A.Jm(new A.wy(r),500,r)],q)
 s=A.ai([null,0],t.LO,t.S)
 return new A.iT(new A.c4(16,16,16,16),new A.wD(new A.a90(!0,!0,!0,q,s),r,B.bZ,!1,r,r,B.jk,!1,r,5,B.b7,r,r,B.ap,B.ah,r),r)}}
 A.ac8.prototype={
