@@ -142,6 +142,14 @@ Future<void> signIn() async {
           Text(message),
           Divider(height: 40),*/
 
+
+      Image.network(
+      'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.jpg',
+      height: 150,
+      fit: BoxFit.contain,
+    ),
+    SizedBox(height: 16),
+
           Text(
             'Nghe audio (Nghĩa học bài):',
             style: TextStyle(fontWeight: FontWeight.bold),
