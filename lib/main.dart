@@ -1,6 +1,10 @@
+import 'word_learning_page.dart';
+import 'conversation_learning_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,15 +48,7 @@ class _AuthPageState extends State<AuthPage> {
 
   String message = '';
 
-  @override
-  void initState() {
-    super.initState();
 
-    // Load audio từ URL public của bạn (đặt đúng URL file audio public)
-    _audioPlayer.setUrl(
-      'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/recordings/audio/a.m4a',
-    );
-  }
 
   @override
   void dispose() {
@@ -161,11 +157,31 @@ Future<void> signIn() async {
                 onPressed: () => _audioPlayer.pause(),
                 child: Text('Pause'),
               ),
+              
+                  
               SizedBox(width: 10),
               ElevatedButton(
-                onPressed: () => _audioPlayer.stop(),
-                child: Text('Stop'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => const ConversationLearningPage()),
+                  );
+                },
+                child: Text('Đàm thoại'),
               ),
+
+
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => const WordLearningPage()),
+                  );
+                },
+                child: Text('Học từ'),
+              ),
+
             ],
           ),
           SizedBox(height: 30),
