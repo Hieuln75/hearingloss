@@ -170,7 +170,7 @@ Future<void> signIn() async {
             MaterialPageRoute(builder: (context) => const LetterQuizPage()),
              );
              },
-           child: Text('Chọn từ'),
+           child: Text('Chọn chữ cái'),
         ),
                   
               SizedBox(width: 10),

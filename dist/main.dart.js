@@ -74144,7 +74144,7 @@ r.V$=0
 s.r.m()
 s.aI()},
 S(a){var s=null,r=t.af
-return new A.ib(new A.bG(16,16,16,16),A.atj(A.d([A.asT("https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.png",B.jJ,100),A.t8(s,16,s),A.f0("Nghe audio (Ngh\u0129a h\u1ecdc b\xe0i):",A.p5(s,s,s,s,s,s,s,s,s,s,s,s,s,s,B.d1,s,s,!0,s,s,s,s,s,s,s,s)),A.aui(A.d([A.qC(A.f0("Play",s),new A.aeA(this),s),A.t8(s,s,10),A.qC(A.f0("Ch\u1ecdn t\u1eeb",s),new A.aeB(a),s),A.t8(s,s,10),A.qC(A.f0("\u0110\xe0m tho\u1ea1i",s),new A.aeC(a),s),A.t8(s,s,10),A.qC(A.f0("H\u1ecdc t\u1eeb",s),new A.aeD(a),s)],r),B.bG,B.cb,B.ey),A.t8(s,30,s),A.f0("Danh s\xe1ch ch\u1eef c\xe1i chi ngh\u0129a h\u1ecdc:",A.p5(s,s,s,s,s,s,s,s,s,s,s,s,s,s,B.d1,s,s,!0,s,s,s,s,s,s,s,s)),A.t8(new A.xv(s),500,s)],r)),s)}}
+return new A.ib(new A.bG(16,16,16,16),A.atj(A.d([A.asT("https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.png",B.jJ,100),A.t8(s,16,s),A.f0("Nghe audio (Ngh\u0129a h\u1ecdc b\xe0i):",A.p5(s,s,s,s,s,s,s,s,s,s,s,s,s,s,B.d1,s,s,!0,s,s,s,s,s,s,s,s)),A.aui(A.d([A.qC(A.f0("Play",s),new A.aeA(this),s),A.t8(s,s,10),A.qC(A.f0("Ch\u1ecdn ch\u1eef c\xe1i",s),new A.aeB(a),s),A.t8(s,s,10),A.qC(A.f0("\u0110\xe0m tho\u1ea1i",s),new A.aeC(a),s),A.t8(s,s,10),A.qC(A.f0("H\u1ecdc t\u1eeb",s),new A.aeD(a),s)],r),B.bG,B.cb,B.ey),A.t8(s,30,s),A.f0("Danh s\xe1ch ch\u1eef c\xe1i chi ngh\u0129a h\u1ecdc:",A.p5(s,s,s,s,s,s,s,s,s,s,s,s,s,s,B.d1,s,s,!0,s,s,s,s,s,s,s,s)),A.t8(new A.xv(s),500,s)],r)),s)}}
 A.aeA.prototype={
 $0(){return this.a.r.cB(0)},
 $S:0}
