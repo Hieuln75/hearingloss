@@ -144,8 +144,8 @@ Future<void> signIn() async {
 
 
       Image.network(
-      'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.jpg',
-      height: 150,
+      'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.png',
+      height: 100,
       fit: BoxFit.contain,
     ),
     SizedBox(height: 16),
@@ -259,6 +259,7 @@ class _LetterAudioListState extends State<LetterAudioList> {
       itemBuilder: (context, index) {
         final letter = letters[index];
         return ListTile(
+          contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // 👈 dòng quan trọng nè
           title: Text('Chữ cái: ${letter['letter']}'),
           trailing: IconButton(
             icon: Icon(Icons.play_arrow),

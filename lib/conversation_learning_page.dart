@@ -101,7 +101,7 @@ class _ConversationLearningPageState extends State<ConversationLearningPage> {
        children: [
          Image.network(
           'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family2.jpg',
-           height: 150,
+           height: 100,
            fit: BoxFit.contain,
       ),
        const SizedBox(height: 16),
@@ -109,6 +109,7 @@ class _ConversationLearningPageState extends State<ConversationLearningPage> {
     // Hiển thị danh sách từ
     ...words.map((word) {
       return ListTile(
+        contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
         title: Text('Từ: ${word['word']}'),
         trailing: IconButton(
           icon: Icon(Icons.play_arrow),

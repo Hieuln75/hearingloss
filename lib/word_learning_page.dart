@@ -89,6 +89,7 @@ class _WordLearningPageState extends State<WordLearningPage> {
         itemBuilder: (context, index) {
           final word = words[index];
           return ListTile(
+            contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // 👈 dòng quan trọng nè
             title: Text('Từ: ${word['word']}'),
             trailing: IconButton(
               icon: Icon(Icons.play_arrow),
