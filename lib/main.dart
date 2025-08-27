@@ -1,5 +1,7 @@
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
+import 'letter_quiz_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:just_audio/just_audio.dart';
@@ -161,11 +163,15 @@ Future<void> signIn() async {
                 child: Text('Play'),
               ),
               SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () => _audioPlayer.pause(),
-                child: Text('Pause'),
-              ),
-              
+          ElevatedButton(
+             onPressed: () {
+             Navigator.push(
+             context,
+            MaterialPageRoute(builder: (context) => const LetterQuizPage()),
+             );
+             },
+           child: Text('Chọn từ'),
+        ),
                   
               SizedBox(width: 10),
               ElevatedButton(
