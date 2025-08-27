@@ -156,7 +156,7 @@ Future<void> signIn() async {
             'Nghe audio (Nghĩa học bài):',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        /*  Row(
+          Row(
             children: [
               ElevatedButton(
                 onPressed: () => _audioPlayer.play(),
@@ -170,7 +170,7 @@ Future<void> signIn() async {
             MaterialPageRoute(builder: (context) => const LetterQuizPage()),
              );
              },
-           child: Text('Chọn chữ cái'),
+           child: Text('Chữ cái'),
         ),
                   
               SizedBox(width: 10),
@@ -197,9 +197,9 @@ Future<void> signIn() async {
               ),
 
             ],
-          ),*/
+          ),
 
-          Row(
+         /* Row(
   children: [
     Flexible(
       child: ElevatedButton(
@@ -256,7 +256,7 @@ Future<void> signIn() async {
       ),
     ),
   ],
-),
+),*/
           SizedBox(height: 30),
           Text(
            'Danh sách chữ cái chi nghĩa học:',
