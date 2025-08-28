@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 
-class LetterQuizPage extends StatefulWidget {
-  const LetterQuizPage({super.key});
+class SentenceQuizPage extends StatefulWidget {
+  const SentenceQuizPage({super.key});
 
   @override
-  State<LetterQuizPage> createState() => _LetterQuizPageState();
+  State<SentenceQuizPage> createState() => _SentenceQuizPageState();
 }
 
-class _LetterQuizPageState extends State<LetterQuizPage> {
+class _SentenceQuizPageState extends State<SentenceQuizPage> {
   final supabase = Supabase.instance.client;
   final player = AudioPlayer();
 
@@ -34,8 +34,8 @@ class _LetterQuizPageState extends State<LetterQuizPage> {
     });
 
     try {
-      // Lấy tất cả câu hỏi trong bảng letters_quiz
-      final data = await supabase.from('letters_quiz').select();
+      // Lấy tất cả câu hỏi trong bảng sentence_quiz
+      final data = await supabase.from('sentence_quiz').select();
 
       if (data == null || (data as List).isEmpty) {
         setState(() {
@@ -120,13 +120,13 @@ class _LetterQuizPageState extends State<LetterQuizPage> {
 
     if (currentQuestion == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Quiz chữ cái')),
+        appBar: AppBar(title: const Text('Quiz câu')),
         body: const Center(child: Text('Không có câu hỏi nào')),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Quiz chữ cái')),
+      appBar: AppBar(title: const Text('Quiz câu')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -151,17 +151,12 @@ class _LetterQuizPageState extends State<LetterQuizPage> {
               ],
             ),
             const SizedBox(height: 10),
-            /*Text(
-              'Chữ cái: ${currentQuestion!['question_letter']}',
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),*/
-            SizedBox.shrink(),
             ElevatedButton(
               onPressed: playAudio,
-              child: const Text('🔊 Nghe phát âm'),
+              child: const Text('🔊 Nghe câu hỏi'),
             ),
             const SizedBox(height: 20),
+
             // Hiển thị các lựa chọn đã xáo trộn
             ...shuffledOptions.map((opt) {
               final isSelected = selectedAnswer == opt;
@@ -176,7 +171,7 @@ class _LetterQuizPageState extends State<LetterQuizPage> {
 
               return Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 24),
+                margin: const EdgeInsets.symmetric(vertical: 12),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: color),
                   onPressed: selectedAnswer == null ? () => checkAnswer(opt) : null,
@@ -184,6 +179,7 @@ class _LetterQuizPageState extends State<LetterQuizPage> {
                 ),
               );
             }),
+
             const SizedBox(height: 20),
             if (selectedAnswer != null)
               ElevatedButton(

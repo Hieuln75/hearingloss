@@ -1,3 +1,4 @@
+import 'sentence_quiz_page.dart';
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
 import 'letter_quiz_page.dart';
@@ -158,9 +159,14 @@ Future<void> signIn() async {
           ),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () => _audioPlayer.play(),
-                child: Text('Play'),
+             ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SentenceQuizPage()),
+        );
+      },
+      child: Text('KT câu'),  // 🔁 Đổi tên nút tại đây
               ),
               SizedBox(width: 10),
           ElevatedButton(
