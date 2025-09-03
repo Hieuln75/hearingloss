@@ -2,7 +2,7 @@ import 'sentence_quiz_page.dart';
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
 import 'letter_quiz_page.dart';
-
+import 'van_quiz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:just_audio/just_audio.dart';
@@ -166,9 +166,9 @@ Future<void> signIn() async {
           MaterialPageRoute(builder: (context) => const SentenceQuizPage()),
         );
       },
-      child: Text('KT câu'),  // 🔁 Đổi tên nút tại đây
+      child: Text('KT Từ'),  // 🔁 Đổi tên nút tại đây
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 8),
           ElevatedButton(
              onPressed: () {
              Navigator.push(
@@ -176,10 +176,21 @@ Future<void> signIn() async {
             MaterialPageRoute(builder: (context) => const LetterQuizPage()),
              );
              },
-           child: Text('Chữ cái'),
+           child: Text('Ký tự'),
         ),
                   
-              SizedBox(width: 10),
+
+               SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => const VanQuizPage()),
+                  );
+                },
+                child: Text('Vần'),
+              ),
+              SizedBox(width: 8),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -187,11 +198,10 @@ Future<void> signIn() async {
                      MaterialPageRoute(builder: (context) => const ConversationLearningPage()),
                   );
                 },
-                child: Text('Đàm thoại'),
+                child: Text('Đ thoại'),
               ),
 
-
-              SizedBox(width: 10),
+              SizedBox(width: 8),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -199,7 +209,7 @@ Future<void> signIn() async {
                      MaterialPageRoute(builder: (context) => const WordLearningPage()),
                   );
                 },
-                child: Text('Học từ'),
+                child: Text('Từ'),
               ),
 
             ],

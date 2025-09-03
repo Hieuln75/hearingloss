@@ -1,23 +1,4 @@
 
-/*import 'package:flutter/material.dart';
-
-class WordLearningPage extends StatelessWidget {
-  const WordLearningPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Học từ')),
-      body: const Center(
-        child: Text(
-          'Đây là màn hình học từ',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    );
-  }
-}
-*/
 
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -111,7 +92,7 @@ class _ConversationLearningPageState extends State<ConversationLearningPage> {
     ...words.map((word) {
       return ListTile(
         contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        title: Text('Từ: ${word['word']}'),
+        title: Text('Câu: ${word['word']}'),
         trailing: IconButton(
           icon: Icon(Icons.play_arrow),
           onPressed: () => playAudio(word['audio_url']),
