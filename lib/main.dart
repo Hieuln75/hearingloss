@@ -157,6 +157,8 @@ Future<void> signIn() async {
             'Nghe audio (Nghĩa học bài):',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
+          
+          /*
           Row(
             children: [
              ElevatedButton(
@@ -214,6 +216,66 @@ Future<void> signIn() async {
 
             ],
           ),
+
+*/
+
+Wrap(
+  spacing: 10, // Khoảng cách ngang giữa các nút
+  runSpacing: 10, // Khoảng cách dọc giữa các hàng
+  alignment: WrapAlignment.center, // Căn giữa các nút
+  children: [
+    ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SentenceQuizPage()),
+        );
+      },
+      child: Text('KT Từ'),
+    ),
+    ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LetterQuizPage()),
+        );
+      },
+      child: Text('Ký tự'),
+    ),
+    ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const VanQuizPage()),
+        );
+      },
+      child: Text('Ghép vần'),
+    ),
+    ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ConversationLearningPage()),
+        );
+      },
+      child: Text('Đàm thoại'),
+    ),
+    ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const WordLearningPage()),
+        );
+      },
+       child: Text('Từ vựng'), // 👉 Thêm dòng này
+    ),
+    ElevatedButton(
+      onPressed: null,
+      child: Text('Đọc truyện'),
+    ),
+  ],
+),
+
 
          /* Row(
   children: [
