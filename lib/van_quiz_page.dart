@@ -154,9 +154,9 @@ class _VanQuizPageState extends State<VanQuizPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
-                      '❌ Bạn sai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
+                      '❌ Bai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 22,
                         color: Colors.red,
                         fontWeight: FontWeight.w500,
                       ),
