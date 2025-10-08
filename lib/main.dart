@@ -3,6 +3,7 @@ import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
 import 'letter_quiz_page.dart';
 import 'van_quiz_page.dart';
+import 'fill_blank_quiz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:just_audio/just_audio.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Dạy nghĩa học nói ',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Nghe từ, ký tự, ghép vần, câu'),
+          title: Text('TIẾNG VIỆT CƠ BẢN'),
         ),
         body: AuthPage(),
       ),
@@ -171,8 +172,13 @@ Wrap(
        child: Text('Từ vựng'), // 👉 Thêm dòng này
     ),
     ElevatedButton(
-      onPressed: null,
-      child: Text('Đọc truyện'),
+          onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const FillBlankQuizPage()),
+        );
+      },
+      child: Text('Điền ô trống'),
     ),
   ],
 ),
