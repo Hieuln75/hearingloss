@@ -66,28 +66,10 @@ class _ConversationLearningPageState extends State<ConversationLearningPage> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-     /* body: ListView.builder(
-        itemCount: words.length,
-        itemBuilder: (context, index) {
-          final word = words[index];
-          return ListTile(
-            title: Text('Từ: ${word['word']}'),
-            trailing: IconButton(
-              icon: Icon(Icons.play_arrow),
-              onPressed: () => playAudio(word['audio_url']),
-            ),
-          );
-        },
-      ),*/
+ 
       body: ListView(
        children: [
-         Image.network(
-          'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family2.jpg',
-           height: 100,
-           fit: BoxFit.contain,
-      ),
-       const SizedBox(height: 16),
-
+    
     // Hiển thị danh sách từ
     ...words.map((word) {
       return ListTile(

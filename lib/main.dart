@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Dạy nghĩa học nói ',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Chương trình cho Nghĩa học'),
+          title: Text('Nghe từ, ký tự, ghép vần, câu'),
         ),
         body: AuthPage(),
       ),
@@ -119,106 +119,7 @@ Future<void> signIn() async {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          /*TextField(
-            controller: _emailController,
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
-          TextField(
-            controller: _passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
-            obscureText: true,
-          ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: signUp,
-            child: Text('Sign Up'),
-          ),
-          ElevatedButton(
-            onPressed: signIn,
-            child: Text('Sign In'),
-          ),
-          ElevatedButton(
-            onPressed: signOut,
-            child: Text('Sign Out'),
-          ),
-          SizedBox(height: 20),
-          Text(message),
-          Divider(height: 40),*/
-
-
-      Image.network(
-      'https://hiqecekamorbjufgwzit.supabase.co/storage/v1/object/public/pictures/family/family1.png',
-      height: 100,
-      fit: BoxFit.contain,
-    ),
-    SizedBox(height: 16),
-
-          Text(
-            'Nghe audio (Nghĩa học bài):',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
           
-          /*
-          Row(
-            children: [
-             ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SentenceQuizPage()),
-        );
-      },
-      child: Text('KT Từ'),  // 🔁 Đổi tên nút tại đây
-              ),
-              SizedBox(width: 8),
-          ElevatedButton(
-             onPressed: () {
-             Navigator.push(
-             context,
-            MaterialPageRoute(builder: (context) => const LetterQuizPage()),
-             );
-             },
-           child: Text('Ký tự'),
-        ),
-                  
-
-               SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                     MaterialPageRoute(builder: (context) => const VanQuizPage()),
-                  );
-                },
-                child: Text('Vần'),
-              ),
-              SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                     MaterialPageRoute(builder: (context) => const ConversationLearningPage()),
-                  );
-                },
-                child: Text('Đ thoại'),
-              ),
-
-              SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                     MaterialPageRoute(builder: (context) => const WordLearningPage()),
-                  );
-                },
-                child: Text('Từ'),
-              ),
-
-            ],
-          ),
-
-*/
-
 Wrap(
   spacing: 10, // Khoảng cách ngang giữa các nút
   runSpacing: 10, // Khoảng cách dọc giữa các hàng
