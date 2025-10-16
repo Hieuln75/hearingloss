@@ -1,6 +1,7 @@
 import 'sentence_quiz_page.dart';
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
+import 'conversation_quiz_page.dart';
 import 'letter_quiz_page.dart';
 import 'van_quiz_page.dart';
 import 'fill_blank_quiz_page.dart';
@@ -171,6 +172,18 @@ Wrap(
       },
        child: Text('Từ vựng'), // 👉 Thêm dòng này
     ),
+    
+        ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ConversationQuizPage()),
+        );
+      },
+       child: Text('đàm thoại quiz'), // 👉 Thêm dòng này
+    ),
+    
+    
     ElevatedButton(
           onPressed: () {
         Navigator.push(
