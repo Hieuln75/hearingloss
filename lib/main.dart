@@ -3,7 +3,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'review_status.dart'; // 👈 Import file model
 import 'sentence_quiz_page.dart';
-import 'sentence_quiz_tts.dart';
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
 import 'conversation_quiz_page.dart';
@@ -145,15 +144,7 @@ Wrap(
       },
       child: Text('KT Từ'),
     ),
-        ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SentenceTTSQuizPage()),
-        );
-      },
-      child: Text('KT2 Từ'),
-    ),
+
     ElevatedButton(
       onPressed: () {
         Navigator.push(
