@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'dart:html' as html; // Chỉ dùng khi chạy trên web
 
 class SentenceTTSQuizPage extends StatefulWidget {
   const SentenceTTSQuizPage({super.key});
@@ -34,7 +35,6 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
     });
 
     try {
-      // Lấy tất cả câu hỏi trong bảng sentence_quiz
       final data = await supabase.from('sentence_quiz').select();
 
       if (data == null || (data as List).isEmpty) {
@@ -47,8 +47,6 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
       }
 
       List questions = List.from(data);
-
-      // Xáo trộn danh sách câu hỏi trong Flutter
       questions.shuffle();
 
       final randomQuestion = questions.first as Map<String, dynamic>;
@@ -60,7 +58,7 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
         randomQuestion['option4'] as String,
       ];
 
-      options.shuffle(); // Xáo trộn các lựa chọn
+      options.shuffle();
 
       setState(() {
         currentQuestion = randomQuestion;
@@ -92,15 +90,17 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
   }
 
   Future<void> speakText(String text) async {
-    await flutterTts.setLanguage("vi-VN");  // Chọn ngôn ngữ là tiếng Việt
-    await flutterTts.setPitch(1);  // Điều chỉnh tông giọng nếu cần
-    await flutterTts.speak(text);  // Phát âm
-  }
+    // Unlock audio trên iOS Web bằng cách phát âm thanh trống
+    try {
+      final audio = html.AudioElement()
+        ..src = ''
+        ..autoplay = true;
+      html.document.body?.append(audio);
+    } catch (_) {}
 
-  @override
-  void dispose() {
-    flutterTts.stop(); // Dừng phát âm khi thoát trang
-    super.dispose();
+    await flutterTts.setLanguage("vi-VN");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
   }
 
   @override
@@ -124,7 +124,6 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // Bộ đếm + thông báo sai nếu cần
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -164,14 +163,12 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
 
             ElevatedButton(
               onPressed: () {
-                // Phát âm câu hỏi từ trường `correct_answer` (vì câu hỏi được lưu tại đây)
                 speakText(currentQuestion?['correct_answer'] as String);
               },
               child: const Text('🔊 Nghe câu hỏi'),
             ),
             const SizedBox(height: 20),
 
-            // Các lựa chọn
             ...shuffledOptions.map((opt) {
               final isSelected = selectedAnswer == opt;
               final correctAnswer = currentQuestion!['correct_answer'] as String;
