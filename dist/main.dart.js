@@ -68458,7 +68458,6 @@ ac7(a){var s=0,r=A.w(t.z),q
 var $async$Dv=A.r(function(b,c){if(b===1)return A.t(c,r)
 while(true)switch(s){case 0:q=a.a
 switch(q){case"speak.onStart":break
-case"tts.init":break
 case"synth.onStart":break
 case"speak.onComplete":break
 case"synth.onComplete":break
@@ -68468,7 +68467,7 @@ case"speak.onCancel":break
 case"speak.onError":break
 case"speak.onProgress":break
 case"synth.onError":break
-default:A.e1("Unknowm method "+q)}return A.u(null,r)}})
+default:A.e1("Unknown method "+q)}return A.u(null,r)}})
 return A.v($async$Dv,r)}}
 A.IG.prototype={
 vs(a,b,c){return this.a8Z(a,b,c)},
