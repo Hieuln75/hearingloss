@@ -1,4 +1,9 @@
+
+
+import 'package:hive_flutter/hive_flutter.dart';
+import 'review_status.dart'; // 👈 Import file model
 import 'sentence_quiz_page.dart';
+import 'sentence_quiz_tts.dart';
 import 'word_learning_page.dart';
 import 'conversation_learning_page.dart';
 import 'conversation_quiz_page.dart';
@@ -13,7 +18,11 @@ import 'package:just_audio/just_audio.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    await Hive.initFlutter(); // dùng được cho mobile + web
 
+  Hive.registerAdapter(ReviewStatusAdapter());
+
+  await Hive.openBox<ReviewStatus>('reviewBox');
   // Khởi tạo Supabase
   await Supabase.initialize(
     url: 'https://hiqecekamorbjufgwzit.supabase.co',       // Thay bằng URL Supabase của bạn
@@ -136,6 +145,15 @@ Wrap(
       },
       child: Text('KT Từ'),
     ),
+        ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SentenceTTSQuizPage()),
+        );
+      },
+      child: Text('KT2 Từ'),
+    ),
     ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -197,64 +215,7 @@ Wrap(
 ),
 
 
-         /* Row(
-  children: [
-    Flexible(
-      child: ElevatedButton(
-        onPressed: () => _audioPlayer.play(),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text('Play', style: TextStyle(fontSize: 14)),
-        ),
-      ),
-    ),
-    SizedBox(width: 10),
-    Flexible(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LetterQuizPage()),
-          );
-        },
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text('Chọn chữ cái', style: TextStyle(fontSize: 14)),
-        ),
-      ),
-    ),
-    SizedBox(width: 10),
-    Flexible(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ConversationLearningPage()),
-          );
-        },
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text('Đàm thoại', style: TextStyle(fontSize: 14)),
-        ),
-      ),
-    ),
-    SizedBox(width: 10),
-    Flexible(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const WordLearningPage()),
-          );
-        },
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text('Học từ', style: TextStyle(fontSize: 14)),
-        ),
-      ),
-    ),
-  ],
-),*/
+    
           SizedBox(height: 30),
           Text(
            'Danh sách chữ cái chi nghĩa học:',

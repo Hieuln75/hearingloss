@@ -137,7 +137,7 @@ class _VanQuizPageState extends State<VanQuizPage> {
                   children: [
                     Text(
                       'Đúng: $correctAnswered / Tổng: $totalAnswered',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     TextButton(
                       onPressed: () {
@@ -146,7 +146,7 @@ class _VanQuizPageState extends State<VanQuizPage> {
                           totalAnswered = 0;
                         });
                       },
-                      child: const Text('🔄 Reset', style: TextStyle(fontSize: 16)),
+                      child: const Text('🔄 Reset', style: TextStyle(fontSize: 14)),
                     ),
                   ],
                 ),
@@ -154,9 +154,9 @@ class _VanQuizPageState extends State<VanQuizPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
-                      '❌ Bai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
+                      '❌ Sai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
                       style: const TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         color: Colors.red,
                         fontWeight: FontWeight.w500,
                       ),
@@ -164,13 +164,13 @@ class _VanQuizPageState extends State<VanQuizPage> {
                   ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             SizedBox.shrink(),
             ElevatedButton(
               onPressed: playAudio,
               child: const Text('🔊 Nghe phát âm'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 14),
             // Hiển thị các lựa chọn đã xáo trộn
             ...shuffledOptions.map((opt) {
               final isSelected = selectedAnswer == opt;
@@ -185,21 +185,21 @@ class _VanQuizPageState extends State<VanQuizPage> {
 
               return Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 24),
+                margin: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: color),
                   onPressed: selectedAnswer == null ? () => checkAnswer(opt) : null,
                   child: Text(
                     opt,
                     style: const TextStyle(
-                      fontSize: 28,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               );
             }),
-            const SizedBox(height: 20),
+            const SizedBox(height: 18),
             if (selectedAnswer != null)
               ElevatedButton(
                 onPressed: fetchAndPickQuestion,

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
-class FillBlankQuizPage extends StatefulWidget {
-  const FillBlankQuizPage({super.key});
+class SentenceTTSQuizPage extends StatefulWidget {
+  const SentenceTTSQuizPage({super.key});
 
   @override
-  State<FillBlankQuizPage> createState() => _FillBlankQuizPageState();
+  State<SentenceTTSQuizPage> createState() => _SentenceTTSQuizPageState();
 }
 
-class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
+class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
   final supabase = Supabase.instance.client;
-  final player = AudioPlayer();
+  final FlutterTts flutterTts = FlutterTts();
 
   Map<String, dynamic>? currentQuestion;
   List<String> shuffledOptions = [];
@@ -34,7 +34,8 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
     });
 
     try {
-      final data = await supabase.from('fill_in_blank_quiz').select();
+      // Lấy tất cả câu hỏi trong bảng sentence_quiz
+      final data = await supabase.from('sentence_quiz').select();
 
       if (data == null || (data as List).isEmpty) {
         setState(() {
@@ -46,6 +47,8 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
       }
 
       List questions = List.from(data);
+
+      // Xáo trộn danh sách câu hỏi trong Flutter
       questions.shuffle();
 
       final randomQuestion = questions.first as Map<String, dynamic>;
@@ -57,7 +60,7 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
         randomQuestion['option4'] as String,
       ];
 
-      options.shuffle();
+      options.shuffle(); // Xáo trộn các lựa chọn
 
       setState(() {
         currentQuestion = randomQuestion;
@@ -88,21 +91,15 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
     });
   }
 
-  Future<void> playAudio() async {
-    final url = currentQuestion?['audio_url'] as String?;
-    if (url != null && url.isNotEmpty) {
-      try {
-        await player.setUrl(url);
-        await player.play();
-      } catch (e) {
-        print('Lỗi phát audio: $e');
-      }
-    }
+  Future<void> speakText(String text) async {
+    await flutterTts.setLanguage("vi-VN");  // Chọn ngôn ngữ là tiếng Việt
+    await flutterTts.setPitch(1);  // Điều chỉnh tông giọng nếu cần
+    await flutterTts.speak(text);  // Phát âm
   }
 
   @override
   void dispose() {
-    player.dispose();
+    flutterTts.stop(); // Dừng phát âm khi thoát trang
     super.dispose();
   }
 
@@ -116,76 +113,65 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
 
     if (currentQuestion == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Quiz điền từ')),
+        appBar: AppBar(title: const Text('Quiz câu')),
         body: const Center(child: Text('Không có câu hỏi nào')),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Quiz điền từ')),
+      appBar: AppBar(title: const Text('Quiz câu')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Phần thống kê + nút reset
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // Bộ đếm + thông báo sai nếu cần
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Đúng: $correctAnswered / Tổng: $totalAnswered',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Đúng: $correctAnswered / Tổng: $totalAnswered',
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          correctAnswered = 0;
+                          totalAnswered = 0;
+                        });
+                      },
+                      child: const Text('🔄 Reset', style: TextStyle(fontSize: 16)),
+                    ),
+                  ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      correctAnswered = 0;
-                      totalAnswered = 0;
-                    });
-                  },
-                  child: const Text('🔄 Reset', style: TextStyle(fontSize: 14)),
-                ),
+                if (selectedAnswer != null && isCorrect == false)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      '❌ Sai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
               ],
             ),
-
-            // Thông báo đúng/sai
-            if (selectedAnswer != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Text(
-                  isCorrect == true
-                      ? '✅ Chính xác!'
-                      : '❌ Sai rồi! Đáp án đúng là: ${currentQuestion!['correct_answer']}',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: isCorrect == true ? Colors.green : Colors.red,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-
             const SizedBox(height: 10),
 
-            // Nút play audio
             ElevatedButton(
-              onPressed: playAudio,
+              onPressed: () {
+                // Phát âm câu hỏi từ trường `correct_answer` (vì câu hỏi được lưu tại đây)
+                speakText(currentQuestion?['correct_answer'] as String);
+              },
               child: const Text('🔊 Nghe câu hỏi'),
             ),
-
-            const SizedBox(height: 12),
-
-            // Hiển thị câu hỏi
-            Center(
-              child: Text(
-                currentQuestion!['question_text'] as String,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
-
             const SizedBox(height: 20),
 
-            // Danh sách lựa chọn
+            // Các lựa chọn
             ...shuffledOptions.map((opt) {
               final isSelected = selectedAnswer == opt;
               final correctAnswer = currentQuestion!['correct_answer'] as String;
@@ -199,17 +185,14 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
 
               return Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 8),
+                margin: const EdgeInsets.symmetric(vertical: 24),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                  ),
+                  style: ElevatedButton.styleFrom(backgroundColor: color),
                   onPressed: selectedAnswer == null ? () => checkAnswer(opt) : null,
                   child: Text(
                     opt,
                     style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -218,13 +201,10 @@ class _FillBlankQuizPageState extends State<FillBlankQuizPage> {
             }),
 
             const SizedBox(height: 20),
-
             if (selectedAnswer != null)
-              Center(
-                child: ElevatedButton(
-                  onPressed: fetchAndPickQuestion,
-                  child: const Text('Câu tiếp theo'),
-                ),
+              ElevatedButton(
+                onPressed: fetchAndPickQuestion,
+                child: const Text('Câu tiếp theo'),
               ),
           ],
         ),
