@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'dart:html' as html; // Chỉ dùng khi chạy trên web
+import 'dart:html' as html; // Dùng Web Speech API trên Web
 
 class SentenceTTSQuizPage extends StatefulWidget {
   const SentenceTTSQuizPage({super.key});
@@ -89,18 +89,47 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
     });
   }
 
+  /// ✅ Hàm phát âm có xử lý null-safety & tương thích Edge/Safari/iPhone
   Future<void> speakText(String text) async {
-    // Unlock audio trên iOS Web bằng cách phát âm thanh trống
     try {
-      final audio = html.AudioElement()
-        ..src = ''
-        ..autoplay = true;
-      html.document.body?.append(audio);
-    } catch (_) {}
+      // 1️⃣ Unlock âm thanh cho Safari/iOS
+      try {
+        final unlock = html.AudioElement()
+          ..src =
+              'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA='
+          ..autoplay = true;
+        html.document.body?.append(unlock);
+        await unlock.play();
+      } catch (_) {}
 
-    await flutterTts.setLanguage("vi-VN");
-    await flutterTts.setPitch(1.0);
-    await flutterTts.speak(text);
+      // 2️⃣ Kiểm tra xem Web Speech API có khả dụng không
+      final synth = html.window.speechSynthesis;
+      if (synth != null) {
+        final utterance = html.SpeechSynthesisUtterance(text);
+        utterance.lang = 'vi-VN';
+
+        // Lấy danh sách voice (nếu có)
+        final voices = synth.getVoices();
+        if (voices.isNotEmpty) {
+          final vietnamVoice = voices.firstWhere(
+            (v) => (v.lang ?? '').startsWith('vi'),
+            orElse: () => voices.first,
+          );
+          utterance.voice = vietnamVoice;
+        }
+
+        synth.cancel(); // Dừng nếu đang phát
+        synth.speak(utterance);
+        return;
+      }
+
+      // 3️⃣ Nếu không phải web hoặc không hỗ trợ API → fallback flutter_tts
+      await flutterTts.setLanguage("vi-VN");
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(text);
+    } catch (e) {
+      print('Lỗi phát âm: $e');
+    }
   }
 
   @override
@@ -124,41 +153,37 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Đúng: $correctAnswered / Tổng: $totalAnswered',
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          correctAnswered = 0;
-                          totalAnswered = 0;
-                        });
-                      },
-                      child: const Text('🔄 Reset', style: TextStyle(fontSize: 16)),
-                    ),
-                  ],
+                Text(
+                  'Đúng: $correctAnswered / Tổng: $totalAnswered',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                if (selectedAnswer != null && isCorrect == false)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4),
-                    child: Text(
-                      '❌ Sai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
-                      style: const TextStyle(
-                        fontSize: 22,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      correctAnswered = 0;
+                      totalAnswered = 0;
+                    });
+                  },
+                  child: const Text('🔄 Reset', style: TextStyle(fontSize: 16)),
+                ),
               ],
             ),
+
+            if (selectedAnswer != null && isCorrect == false)
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  '❌ Sai rồi! Đáp án đúng là: ${currentQuestion?['correct_answer']}',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             const SizedBox(height: 10),
 
             ElevatedButton(
@@ -182,16 +207,13 @@ class _SentenceTTSQuizPageState extends State<SentenceTTSQuizPage> {
 
               return Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 24),
+                margin: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: color),
                   onPressed: selectedAnswer == null ? () => checkAnswer(opt) : null,
                   child: Text(
                     opt,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
               );
